@@ -71,7 +71,7 @@ def train_and_predict(X_train, y_train, x_test, country):
         return scores.mean()
 
     best_parameters = fmin(objective_func, space=hp.uniform(
-        "C", 1, 100), algo=tpe.suggest, max_evals=100)
+        "C", 1, 100), algo=tpe.suggest, max_evals=10)
 
     # Reconstruct classifier
     final_classifier = SVC(C=best_parameters["C"], probability=True)
