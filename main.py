@@ -67,7 +67,8 @@ def train_and_predict(X_train, y_train, x_test, country):
 
     def objective_func(C):
         classifier = SVC(C=C, probability=True)
-        scores = cross_val_score(classifier, X_train, y_train, cv=5)
+        scores = cross_val_score(
+            classifier, X_train, y_train, cv=5, scoring="f1")
 
         # Return loss
         return 1 - scores.mean()
