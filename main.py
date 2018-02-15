@@ -68,10 +68,10 @@ def train_and_predict(X_train, y_train, x_test, country):
     def objective_func(C):
         classifier = SVC(C=C, probability=True)
         scores = cross_val_score(
-            classifier, X_train, y_train, cv=5, scoring="f1")
+            classifier, X_train, y_train, cv=5, scoring="neg_log_loss")
 
         # Return loss
-        return 1 - scores.mean()
+        return scores.mean()
 
     best_parameters = fmin(objective_func, space=hp.uniform(
         "C", 1, 100), algo=tpe.suggest, max_evals=10)
